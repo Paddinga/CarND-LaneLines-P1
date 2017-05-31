@@ -13,37 +13,29 @@ Lane Finding Pipeline
 ---
 
 To identify and indicate the relevant lines I used the following pipeline.
+<img src="test_images_output/initial.png" width="480" alt="Combined Image" />
 
-1. Convert the image to greyscale.
-	I 
+1. Convert the image to greyscale. First I used the provided function averaging over the 3 channels RGB. Due to the reason, that the yellow lines weren't correctly detected (especially in challenge) I switched to just use the red channel.
 
-2. Identify any shortcomings
+<img src="test_images_output/gray.png" width="480" alt="Combined Image" />
 
-3. Suggest possible improvements
+2. Apply a Gaussian blur to smoothen the picture.
 
-We encourage using images in your writeup to demonstrate how your pipeline works.  
+<img src="test_images_output/blur.png" width="480" alt="Combined Image" />
 
-All that said, please be concise!  We're not looking for you to write a book here: just a brief description.
+3. Apply Canny edges to detect edges in the picture.
 
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup. Here is a link to a [writeup template file](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md). 
+<img src="test_images_output/canny.png" width="480" alt="Combined Image" />
 
+4. Apply a mask over the designated area of lines in front of the vehicle.
 
-The Project
----
+<img src="test_images_output/mask.png" width="480" alt="Combined Image" />
 
-## If you have already installed the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) you should be good to go!   If not, you should install the starter kit to get started on this project. ##
+5. Run Hough transformation and run the revised draw_lines(). There the lines are classified into right and left lines. For each class the average of slope and offset (or intercept) is calculated and handed over to the equation for a line. To handle the increased size of the challenge video the image.shape() is also handed over to this function to get the boundaries of the picture correctly.
 
-**Step 1:** Set up the [CarND Term1 Starter Kit](https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/83ec35ee-1e02-48a5-bdb7-d244bd47c2dc/lessons/8c82408b-a217-4d09-b81d-1bda4c6380ef/concepts/4f1870e0-3849-43e4-b670-12e6f2d4b7a7) if you haven't already.
+<img src="test_images_output/lines.png" width="480" alt="Combined Image" />
 
-**Step 2:** Open the code in a Jupyter Notebook
+6. Finally the lines are shown in an overlay with the inital picture / video.
 
-You will complete the project code in a Jupyter notebook.  If you are unfamiliar with Jupyter Notebooks, check out <A HREF="https://www.packtpub.com/books/content/basics-jupyter-notebook-and-python" target="_blank">Cyrille Rossant's Basics of Jupyter Notebook and Python</A> to get started.
-
-Jupyter is an Ipython notebook where you can run blocks of code and see results interactively.  All the code for this project is contained in a Jupyter notebook. To start Jupyter in your browser, use terminal to navigate to your project directory and then run the following command at the terminal prompt (be sure you've activated your Python 3 carnd-term1 environment as described in the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) installation instructions!):
-
-`> jupyter notebook`
-
-A browser window will appear showing the contents of the current directory.  Click on the file called "P1.ipynb".  Another browser window will appear displaying the notebook.  Follow the instructions in the notebook to complete the project.  
-
-**Step 3:** Complete the project and submit both the Ipython notebook and the project writeup
+<img src="test_images_output/final.png" width="480" alt="Combined Image" />
 
