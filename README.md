@@ -39,3 +39,16 @@ To identify and indicate the relevant lines I used the following pipeline.
 
 <img src="test_images_output/final.png" width="480" alt="Combined Image" />
 
+Shortcomings
+---
+
+Changing the size of the picture including angle and distance of the camera to the road is not covered satisfactorily due to relative values to the image size and no consideration of actual areas of designated lines. 
+
+The segment in the challenge video with the shadow was quite challenging and is still not covered correctly by the algorithm.
+
+Improvements
+---
+
+To improve the pipeline I suggest an adaptive mask to cover different camera distances and angles.
+
+There might be a chance to improve the detection of yellow lines by preprocessing the image and normalize the colors between areas with sun and shadow.
